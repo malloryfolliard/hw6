@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Amicable Numbers</title>
+	<meta name='viewport' content="width=device-width, initial-scale=1">
+</head>
+
+<style type="text/css">
+	
+</style>
+
+<body>
+	<form >
+		<p>Input Value 1: </p>
+		<input type="text" name="numOne" id="one"> </br>
+		<p>Input Value 2: </p>
+		<input type="text" name="numTwo" id="two"> </br>
+	</br>
+		<input type="button" name="submit" value="Submit" onclick="run()">
+	</form>
+
+
+	<div id="results"></div>
+
+	<script type="text/javascript">
+		function run() {
+			//store two numbers as variables
+			var one = document.getElementById('one').value;
+			var two = document.getElementById('two').value;
+
+			//find factors of x
+			var halfOne = Math.ceil(one/2);
+			oneFactors = new Array;
+			for (let i = 2; i<=halfOne; i++) {
+				if (isAFactor(i,one)) {
+					oneFactors.push(i);
+				}
+			}
+
+			//store factors in first string for alert output
+			var stringOne = "1";
+			for (let i=0; i < oneFactors.length; i++) {
+				stringOne += ", " + oneFactors[i];
+			}
+
+			//find factors of y
+			var halfTwo = Math.ceil(two/2);
+			twoFactors = new Array;
+			for (let i = 2; i<=halfTwo; i++) {
+				if (isAFactor(i,two)) {
+					twoFactors.push(i);
+				}
+			}
+
+			//store factors in secondstring for alert output
+			var stringTwo = "1";
+			for (let i=0; i < twoFactors.length; i++) {
+				stringTwo += ", " + twoFactors[i];
+			}
+
+			alert("The factors of " + one + " are " + stringOne + "\nThe factors of " + two + " are " + stringTwo);
+
+			//sum of first factors
+			var firstSum =1;
+			for (let i=0; i<oneFactors.length; i++) {
+				firstSum+= oneFactors[i];
+			}
+
+			//sum of second factors
+			var secondSum = 1;
+			for (let i=0; i<twoFactors.length; i++) {
+				secondSum+= twoFactors[i];
+			}
+
+			if (firstSum == two && secondSum == one) {
+				document.getElementById('results').innerHTML = "The numbers: " + one + " and " + two + " are amicable";
+			} else {
+				document.getElementById('results').innerHTML = "The numbers: " + one + " and " + two + " are not amicable";
+			}
+		}
+
+		function isAFactor(x,y) {
+			if (y%x == 0) return true;
+			else return false;
+		}
+	</script>
+</body>
+</html>
